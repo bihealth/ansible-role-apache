@@ -1,0 +1,7 @@
+---
+
+# The name of the certificate to use.
+apache_cert_name: "{{ inventory_hostname }}"
+
+# The public FQDN of the server.
+apache_public_fqdn: "{{ inventory_hostname }}"

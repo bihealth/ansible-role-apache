@@ -1,0 +1,50 @@
+---
+
+- name: define distribution-specific variables
+  include_vars: "{{ ansible_os_family }}.yml"
+
+- name: perform installation
+  include_tasks: install/{{ ansible_os_family }}.yml
+
+- name: enable and start apache
+  systemd: name={{ apache_service }} state=started enabled=true
+
+- name: remove configuration for welcome page
+  file:
+    path: "{{ apache_welcome_conf }}"
+    state: absent
+  notify: restart apache
+
+- name: create SSL directories
+  file:
+    path: /etc/pki/tls/{{ item }}
+    owner: root
+    group: root
+    mode: ugo=rx
+    recurse: true
+  loop:
+  - certs
+  - private
+  changed_when: false  # hack
+
+- name: copy SSL certificate
+  copy:
+    src: /etc/ssl/certs/{{ apache_cert_name }}.crt
+    dest: /etc/pki/tls/certs/server.crt
+    remote_src: true
+    owner: root
+    group: root
+    mode: ugo=r
+  notify: restart apache
+  changed_when: false  # hack
+
+- name: copy SSL certificate key (readable for apache)
+  copy:
+    src: /etc/ssl/private/{{ apache_cert_name }}.key
+    dest: /etc/pki/tls/private/server.key
+    remote_src: true
+    owner: "{{ apache_user }}"
+    group: "{{ apache_group }}"
+    mode: ug=r,o=
+  notify: restart apache
+  changed_when: false  # hack

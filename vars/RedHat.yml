@@ -1,0 +1,7 @@
+---
+
+apache_package: httpd
+apache_service: httpd
+apache_user: apache
+apache_group: apache
+apache_welcome_conf: /etc/httpd/conf.d/welcome.conf
