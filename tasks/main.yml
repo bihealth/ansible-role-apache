@@ -6,9 +6,6 @@
 - name: perform installation
   include_tasks: install/{{ ansible_os_family }}.yml
 
-- name: enable and start apache
-  systemd: name={{ apache_service }} state=started enabled=true
-
 - name: remove configuration for welcome page
   file:
     path: "{{ apache_welcome_conf }}"
@@ -48,3 +45,6 @@
     mode: ug=r,o=
   notify: restart apache
   changed_when: false  # hack
+
+- name: enable and start apache
+  systemd: name={{ apache_service }} state=started enabled=true

@@ -1,14 +1,22 @@
 ---
 
-# - name: install EPEL repository
-#   yum: name=epel-release state=present
-#   when: >  # not for Fedora
-#     ansible_distribution == 'CentOS' or
-#     ansible_distribution == 'Red Hat Enterprise Linux'
-
 - name: install httpd
   yum:
     name:
       - "{{ apache_package }}"
       - mod_ssl
     state: present
+
+- name: fix SSL cert configuration if necessary
+  lineinfile:
+    path: /etc/httpd/conf.d/ssl.conf
+    regexp: "SSLCertificateFile.*localhost.crt"
+    line: "SSLCertificateFile /etc/pki/tls/certs/server.crt"
+  changed_when: false  # hack
+
+- name: fix SSL key configuration if necessary
+  lineinfile:
+    path: /etc/httpd/conf.d/ssl.conf
+    regexp: "SSLCertificateKeyFile.*localhost.key"
+    line: "SSLCertificateKeyFile /etc/pki/tls/private/server.key"
+  changed_when: false  # hack

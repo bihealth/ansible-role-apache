@@ -1,6 +1,6 @@
 # Changelog
 
-## HEAD (unreleased)
+## v0.1.1
 
 - Enabling `mod_ssl` by default
 - Defining variable `apache_conf_dir`.
