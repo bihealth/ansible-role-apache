@@ -5,3 +5,8 @@
     name:
       - "{{ apache_package }}"
     state: present
+
+- name: enable mod_ssl
+  apache2_module:
+    name: ssl
+    state: present

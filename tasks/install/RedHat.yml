@@ -10,4 +10,5 @@
   yum:
     name:
       - "{{ apache_package }}"
+      - mod_ssl
     state: present
