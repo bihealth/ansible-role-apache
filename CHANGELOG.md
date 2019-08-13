@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.1.2
+
+- Bumping dependency `bihealth.ssl_certs`.
+
 ## v0.1.1
 
 - Enabling `mod_ssl` by default
