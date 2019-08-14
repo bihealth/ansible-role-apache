@@ -1,7 +1,7 @@
 ---
 
 galaxy_info:
-  role_name: bihealth.ansible-role-apache
+  role_name: apache
   author: Manuel Holtgrewe
   description: Basic setup as Apache (currently for DAVrods only).
   company: Core Unit Bioinformatics (CUBI), Berlin Institute of Health (BIH)

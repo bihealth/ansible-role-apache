@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.1.3
+
+- Fixing dependency `bihealth.ssl_certs` to use Galaxy version.
+- Fixing role name.
+
 ## v0.1.2
 
 - Bumping dependency `bihealth.ssl_certs`.
