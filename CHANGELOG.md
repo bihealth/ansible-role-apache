@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.1.4
+
+- Removing standard SSL configuration.
+
 ## v0.1.3
 
 - Fixing dependency `bihealth.ssl_certs` to use Galaxy version.
