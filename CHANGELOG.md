@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.1.5
+
+- Undoing removal of standard SSL configuration.
+
 ## v0.1.4
 
 - Removing standard SSL configuration.

@@ -6,9 +6,3 @@
       - "{{ apache_package }}"
       - mod_ssl
     state: present
-
-- name: remove standard SSL configuration
-  file:
-    path: /etc/httpd/conf.d/ssl.conf
-    state: absent
-  notify: restart apache

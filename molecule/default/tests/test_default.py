@@ -8,4 +8,4 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 
 def test_external_socket(host):
     assert host.socket("tcp://0.0.0.0:80").is_listening
-    # assert host.socket("tcp://0.0.0.0:443").is_listening
+    assert host.socket("tcp://0.0.0.0:443").is_listening
