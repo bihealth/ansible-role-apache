@@ -23,6 +23,7 @@
   - certs
   - private
   changed_when: false  # hack
+  when: apache_enable_ssl and not apache_use_letsencrypt
 
 - name: copy SSL certificate
   copy:
@@ -34,6 +35,7 @@
     mode: ugo=r
   notify: restart apache
   changed_when: false  # hack
+  when: apache_enable_ssl and not apache_use_letsencrypt
 
 - name: copy SSL certificate key (readable for apache)
   copy:
@@ -45,6 +47,18 @@
     mode: ug=r,o=
   notify: restart apache
   changed_when: false  # hack
+  when: apache_enable_ssl and not apache_use_letsencrypt
 
 - name: enable and start apache
   systemd: name={{ apache_service }} state=started enabled=true
+
+- name: run certbot with apache plugin
+  command: >
+    certbot --apache
+    --agree-tos
+    --email {{ apache_letsencrypt_email }}}
+    {% for domain in apache_letsencrypt_domains %}-d {{ domain }}{% endfor %}
+  args:
+    creates: /etc/letsencrypt
+  when: apache_enable_ssl and apache_use_letsencrypt
+  notify: restart apache

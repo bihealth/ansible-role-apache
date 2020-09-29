@@ -5,3 +5,12 @@ apache_cert_name: "{{ inventory_hostname }}"
 
 # The public FQDN of the server.
 apache_public_fqdn: "{{ inventory_hostname }}"
+
+# Allows to disable SSL certificate setup.
+apache_enable_ssl: true
+
+# Use letstencrypt for certificate management.
+apache_use_letsencrypt: false
+
+# Domains to obtain certificates for using certbot
+apache_letsencrypt_domains: []
