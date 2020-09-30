@@ -62,3 +62,12 @@
     creates: /etc/letsencrypt
   when: apache_enable_ssl and apache_use_letsencrypt
   notify: restart apache
+
+- name: register certbot renewal cron job
+  cron:
+    name: certbot renewal
+    minute: "5"
+    hour: "0,12"
+    job: /usr/bin/certbot renew --quiet
+    user: root
+    cron_file: cerbot-renew
