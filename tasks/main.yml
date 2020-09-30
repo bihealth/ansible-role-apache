@@ -71,3 +71,4 @@
     job: /usr/bin/certbot renew --quiet
     user: root
     cron_file: cerbot-renew
+  when: apache_enable_ssl and apache_use_letsencrypt
